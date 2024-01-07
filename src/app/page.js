@@ -19,7 +19,7 @@ export default function HomePage() {
           This app uses the Next.js App Router and Material UI v5.
         </Alert>
         <Grid container rowSpacing={3} columnSpacing={3} align="center">
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <div>
             <Face6 style={{ fontSize: '10rem' }}/>
             </div>
