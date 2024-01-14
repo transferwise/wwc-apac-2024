@@ -15,7 +15,7 @@ services:
       - /app/.next
     ports:
       - 3000:3000
-  postgres:
+  wise_pg:
     image: postgres:16
     container_name: wise_pg
     restart: always
