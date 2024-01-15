@@ -25,5 +25,3 @@ services:
       - POSTGRES_USER=wwc-apac
       - POSTGRES_PASSWORD=STRONGpass
       - POSTGRES_DB=wise
-    volumes:
-      - ./initial_schema.sql:/docker-entrypoint-initdb.d/init.sql

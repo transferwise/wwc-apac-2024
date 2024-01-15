@@ -15,17 +15,34 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Run development docker
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm run docker:dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This will bring up docker containers for the database, Nextjs api routes and Nextjs frontend.
+Nextjs development mode by default will already have hot-reloading for frontend pages.
+The development docker will use nodemon to ensure hot-reloading for the api routes too.
 
-## Learn More
+# Run database migrations
 
-To learn more about Next.js, take a look at the following resources:
+After you bring up the docker containers, run the migration:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run knex migrate:up
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# Environment Variables
+
+Create your own `.env.local` file using the `.env.local.example` as an example.
+
+Nextjs will automatically load `.env.local` as `process.env` variables, but for knex commands we use `dotenv-cli` to load the env variables.
+
+# Connecting to the database 
+
+DBeaver is one of the options you could use to connect to the database, unless you love the command line for postgres.
+
+# Note about volumes 
+renew-anon-volumes is useful for always refreshing node modules volume when installing new packages 
+however it always creates new volumes so you might need to docker prune volumes more often when using it
