@@ -1,7 +1,7 @@
 export default function TransferPage() {
     return (
       <>
-      Hello
+      Show the transfer id and information on this page
       </>
     );
 }

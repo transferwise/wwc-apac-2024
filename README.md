@@ -17,6 +17,8 @@ bun dev
 
 # Run development docker
 
+I recommend this over the normal npm run dev.
+
 ```bash
 npm run docker:dev
 ```
@@ -33,6 +35,14 @@ After you bring up the docker containers, run the migration:
 npm run knex migrate:up
 ```
 
+# Seed database with sample data
+
+```bash
+npm run knex seed:run
+```
+
+According to the knex guide, seed files are executed in alphabetical order. Unlike migrations, every seed file will be executed when you run the command. You should design your seed files to reset tables as needed before inserting data.
+
 # Environment Variables
 
 Create your own `.env.local` file using the `.env.local.example` as an example.
@@ -43,6 +53,10 @@ Nextjs will automatically load `.env.local` as `process.env` variables, but for 
 
 DBeaver is one of the options you could use to connect to the database, unless you love the command line for postgres.
 
-# Note about volumes 
-renew-anon-volumes is useful for always refreshing node modules volume when installing new packages 
-however it always creates new volumes so you might need to docker prune volumes more often when using it
+# Note about volumes
+
+`renew-anon-volumes`` is useful for always refreshing and creating a new volume for node_modules when installing new packages. However it always creates new volumes so you might need to docker prune volumes more often when using it.
+
+# Note about database table names
+
+I recommend using lowercase because postgres flavor of SQL does not play well with uppercase / camelCase unless you use quotes. However, if you use lowercase with underscores (snakecase), usually you will need to convert the underscores in the table names to camelCase when using an ORM like knex, since JavaScript variables should be in camelCase. The easiest way to solve this is to just use lowercase without underscores for now...
