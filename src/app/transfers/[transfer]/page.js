@@ -30,6 +30,8 @@ export default function TransferPage({transfer}) {
       </CardContent>
     </React.Fragment>
   );
+
+  // TODO: use List component instead of card component (BASIC List)
   const transferDetails = (
     <React.Fragment>
       <CardContent>
