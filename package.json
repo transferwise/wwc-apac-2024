@@ -14,7 +14,7 @@
     "nodemon": "nodemon --watch pages --exec next dev",
     "docker:dev": "docker-compose up --build --renew-anon-volumes",
     "docker:prod": "docker-compose -f docker-compose.prod.yml up -d --build",
-    "knex": "dotenv -e .env.local knex"
+    "knex": "dotenv -e .env.migrate knex"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
