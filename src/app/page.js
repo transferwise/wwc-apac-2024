@@ -15,10 +15,6 @@ export default function HomePage({transfer, onClick}) {
     <ResponsiveAppBar> </ResponsiveAppBar>
     <Container maxWidth={false}>
       <div>
-        <Alert severity="info" sx={{ mt: 2, mb: 5 }}>
-          <AlertTitle>Hello 👋</AlertTitle>
-          This app uses the Next.js App Router and Material UI v5.
-        </Alert>
         <Grid container rowSpacing={3} columnSpacing={3} align="center">
           <Grid xs={6}>
             <div>

@@ -24,8 +24,8 @@ export default function TransferPage() {
     try {
       console.log("hello")
       const res = await fetch(`/api/transfers/${params.transfer}`);
-      const data = res.json();
-      setTransferDetailsJson(data)
+      const data = await res.json();
+      setTransferDetailsJson(data.result[0])
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -34,7 +34,7 @@ export default function TransferPage() {
     transferDetailsResponse();
   }, []);
   
-  const pricingDetailsJson = {transferId: '1', Fee: '2.02', conversionRate: 0.75}
+  const pricingDetailsJson = {transferId: params.transfer, conversionFee: '2.02', conversionRate: 0.75}
   
   const feeDetails = () => (
     <React.Fragment>
@@ -76,7 +76,7 @@ export default function TransferPage() {
     return (
       loading ? <> </> : 
       <Container maxWidth={false}>
-        <Chip label="Transfer 123" color="success" size="medium" ></Chip>
+        <Chip label={`Transfer ${params.transfer}`} color="success" size="medium" ></Chip>
         <Card variant="outlined">{transferDetails()}</Card>
       </Container>
  
