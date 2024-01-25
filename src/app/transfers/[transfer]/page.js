@@ -11,8 +11,19 @@ import Typography from '@mui/material/Typography';
 import { ListItem } from '@mui/material';
 
 export default function TransferPage({transfer}) {
-  // const transferDetails = await fetch('/api/v1/transfers/${transfer.id}')
-  const transferDetailsJson = {fundingMethod : 'Bank Transfer', sourceAmount: 500, sourceCurrency: 'SGD', targetAmount: 370.81, targetCurrency: 'USD'}
+  const transferDetailsResponse =  () => {
+    try {
+      const res =  fetch(`api/v1/transfers/${transfer.id}`);
+      const data =  res.json();
+      return(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  console.log(transferDetailsResponse.da);
+
+  const transferDetailsJson = {fundingMethod : 'Bank Transfer', sourceAmount: 501, sourceCurrency: 'SGD', targetAmount: 370.81, targetCurrency: 'USD'}
   const feeDetailsJson = {conversionFee: '2.80', convertedAmount: 497.20, conversionRate: 0.75}
   
   const feeDetails = (
