@@ -7,7 +7,11 @@ const tableName = 'transfers';
 exports.seed = async function(knex) {
     await knex(tableName).del()
     await knex(tableName).insert([
-        {transferId: "123", paymentMode: "bank", paymentReference: "forex",
-            sourceAmount: 12.23, sourceCurrency: "sgd", targetCurrency:"usd"}
+        {transferId: "1", paymentMode: "Bank Transfer", paymentReference: "forex",
+            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: "XX"},
+        {transferId: "2", paymentMode: "Bank Transfer", paymentReference: "forex",
+            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: "XX"},
+        {transferId: "3", paymentMode: "Bank Transfer", paymentReference: "forex",
+            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: "XX"}
     ]);
 };
