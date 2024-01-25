@@ -32,7 +32,7 @@ The development docker will use nodemon to ensure hot-reloading for the api rout
 After you bring up the docker containers, run the migration:
 
 ```bash
-npm run knex migrate:up
+npm run knex migrate:latest
 ```
 
 # Seed database with sample data
