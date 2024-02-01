@@ -1,4 +1,4 @@
-import Calculator from "@/components/Calculator";
+import Calculator from "@/components/calculator/Calculator";
 import CenteredComponent from "@/components/CenteredComponent";
 import ResponsiveAppBar from "@/components/ResponsiveAppBar";
 
