@@ -57,13 +57,14 @@ function Calculator() {
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    boxShadow: 'none'
   }));
 
   return (
     <>
-      <Box sx={{ '& > :not(style)': { m: 1 }, width: 1000 }}>
-        <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap flexWrap="wrap">
-          <Item><TextField
+        <Stack sx={{ m: 2 }} spacing={5} direction="row">
+          <Item>
+            <TextField
             id="inputAmount"
             label="You send"
             variant="outlined"
@@ -90,44 +91,34 @@ function Calculator() {
             </FormControl>
           </Item>
         </Stack>
-      </Box>
-      <Box sx={{ '& > :not(style)': { m: 1 }, width: 1000 }}>
-        <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap flexWrap="wrap">
+        <Stack sx={{ m: 2 }} spacing={5} direction="row">
+          <Fab size="small" color="primary" aria-label="remove">
+            <RemoveIcon></RemoveIcon>
+          </Fab>
           <Item>
-            <Box sx={{ '& > :not(style)': { m: 1 } }}>
-              <Fab size="small" color="primary" aria-label="remove">
-                <RemoveIcon></RemoveIcon>
-              </Fab>
-              {2.00 + " " + sourceCurrency}
-              <Chip label="Transfer Fees" color="primary" />
-            </Box>
+          {2.00 + " " + sourceCurrency}
           </Item>
+          <Chip label="Transfer Fees" color="primary" />
         </Stack>
-        <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap flexWrap="wrap">
+        <Stack sx={{ m: 2 }} spacing={5} direction="row">
+            <Fab size="small" color="primary" aria-label="remove">
+              <DragHandleIcon></DragHandleIcon>
+            </Fab>
           <Item>
-            <Box sx={{ '& > :not(style)': { m: 1 } }}>
-              <Fab size="small" color="primary" aria-label="remove">
-                <DragHandleIcon></DragHandleIcon>
-              </Fab>
-              {2.00 + " " + sourceCurrency}
-              <Chip label="Amount we'll convert" color="primary" />
-            </Box>
+            {2.00 + " " + sourceCurrency}
           </Item>
+          <Chip label="Amount we'll convert" color="primary" />
         </Stack>
-        <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap flexWrap="wrap">
+        <Stack sx={{ m: 2 }} spacing={5} direction="row">
+          <Fab size="small" color="primary" aria-label="remove">
+            <CloseIcon></CloseIcon>
+          </Fab>
           <Item>
-            <Box sx={{ '& > :not(style)': { m: 1 } }}>
-              <Fab size="small" color="primary" aria-label="remove">
-                <CloseIcon></CloseIcon>
-              </Fab>
-              {rate}
-              <Chip label="Rate" color="primary" />
-            </Box>
+          {rate}
           </Item>
+          <Chip label="Rate" color="primary" />
         </Stack>
-      </Box >
-      <Box sx={{ '& > :not(style)': { m: 1 }, width: 1000 }}>
-        <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap flexWrap="wrap">
+        <Stack sx={{ m: 2 }} spacing={5} direction="row">
           <Item>
             <TextField
               disabled
@@ -135,7 +126,8 @@ function Calculator() {
               label="Recipient gets"
               value={targetAmount}
               type="number"
-            /></Item>
+            />
+            </Item>
           <Item>
             <FormControl>
               <InputLabel id="select-currency-label">Select a currency:</InputLabel>
@@ -156,7 +148,6 @@ function Calculator() {
             </FormControl>
           </Item>
         </Stack>
-      </Box>
     </>
   );
 };

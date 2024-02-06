@@ -1,19 +1,21 @@
 'use client'
 
-import { Box } from "@mui/material";
+import { Grid } from "@mui/material";
 
 const CenteredComponent = ({ children }) => {
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh" // Ensures the container fills the entire viewport height
-    >
-      <div>
-        {children}
-      </div>
-    </Box>
+<Grid
+  container
+  spacing={0}
+  direction="column"
+  alignItems="center"
+  justifyContent="center"
+  sx={{ minHeight: '100vh' }}
+>
+  <Grid item xs={1}>
+    {children}
+  </Grid>
+</Grid>
   );
 };
 export default CenteredComponent;
