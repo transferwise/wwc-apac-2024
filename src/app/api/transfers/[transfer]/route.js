@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import knex from '@/db/knex'
 
 export async function GET(req, { params }) {
-    console.log("YAAAAAAAA")
+    console.log("fetching transfers...")
     const transferId = params.transfer
     const transferWithPricing = await knex.from('transfers')
         .select('transfers.*', 'pricing.*')

@@ -11,6 +11,7 @@ export async function POST(req) {
 
   const fee = (1 / 100) * sourceAmount;
   const total = sourceAmount + fee;
+
   const rate = await knex
     .from("rates")
     .where({
@@ -19,12 +20,19 @@ export async function POST(req) {
     })
     .andWhere("date", "<", knex.fn.now())
     .first();
+
   const targetAmount = total * rate.rate;
+  const roundedNumber = formatNumberWithTwoDecimals(targetAmount);
 
   return NextResponse.json({
     ...data,
     fee: fee,
-    rate: rate,
-    targetAmount: targetAmount,
+    rate: rate.rate,
+    targetAmount: roundedNumber,
   });
+}
+
+function formatNumberWithTwoDecimals(number) {
+  const formattedNumber = Number(number).toFixed(2);
+  return formattedNumber.replace(/\.00$/, ''); // Remove decimal part if it's .00
 }

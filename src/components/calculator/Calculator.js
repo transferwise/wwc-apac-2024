@@ -7,8 +7,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import CloseIcon from '@mui/icons-material/Close';
 
-const { default: AmountInput } = require("./AmountInput");
-const { default: CurrencySelector } = require("./CurrencySelector");
 const { useState } = require("react")
 
 function Calculator() {
@@ -17,20 +15,41 @@ function Calculator() {
   const [sourceAmount, setSourceAmount] = useState(1000);
   const [targetAmount, setTargetAmount] = useState(1000);
   const [sourceCurrency, setSourceCurrency] = useState(currencies[0]);
-  const [targeCurrency, setTargetCurrency] = useState(currencies[1]);
+  const [targetCurrency, setTargetCurrency] = useState(currencies[1]);
   const [rate, setRate] = useState(1.175);
 
-  const handleSetSourceAmount = (event) => {
+  const handleSetSourceAmount = async (event) => {
     setSourceAmount(event.target.value);
+    await callCalculatorApi(event.target.value, sourceCurrency, targetCurrency);
   };
 
-  const handleSetSourceCurrency = (event) => {
+  const handleSetSourceCurrency = async (event) => {
     setSourceCurrency(event.target.value);
+    await callCalculatorApi(sourceAmount, event.target.value, targetCurrency);
   };
 
-  const handleSetTargetCurrency = (event) => {
+  const handleSetTargetCurrency = async (event) => {
     setTargetCurrency(event.target.value);
+    await callCalculatorApi(sourceAmount, sourceCurrency, event.target.value);
   };
+
+  const callCalculatorApi = async (srcAmount, srcCurrency, trgCurrency) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ sourceAmount: srcAmount, sourceCurrency: srcCurrency, targetCurrency: trgCurrency })
+    };
+    try {
+      const res = await fetch(`/api/calculator/`, requestOptions);
+      const newData = await res.json();
+      setRate(newData.rate)
+      setTargetAmount(newData.targetAmount)
+    } catch (err) {
+      console.log("Error calling API");
+    }
+  }
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -39,7 +58,6 @@ function Calculator() {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
-
 
   return (
     <>
@@ -124,7 +142,7 @@ function Calculator() {
               <Select
                 labelId="select-currency-label"
                 id="select"
-                value={targeCurrency}
+                value={targetCurrency}
                 onChange={handleSetTargetCurrency}
                 label="Select an Option"
                 defaultValue={currencies[0]}
