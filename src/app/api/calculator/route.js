@@ -21,6 +21,15 @@ export async function POST(req) {
     .andWhere("date", "<", knex.fn.now())
     .first();
 
+  if (rate === undefined) {
+    return NextResponse.json({
+      ...data,
+      fee: -1,
+      rate: -1,
+      targetAmount: -1,
+    })
+  }
+
   const targetAmount = total * rate.rate;
   const roundedNumber = formatNumberWithTwoDecimals(targetAmount);
 

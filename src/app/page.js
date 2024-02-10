@@ -1,15 +1,12 @@
 import * as React from 'react';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import ResponsiveAppBar from '@/components/ResponsiveAppBar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Face6 } from '@mui/icons-material'
-import Link from 'next/link'
 
-export default function HomePage({transfer, onClick}) {
+export default function HomePage() {
   return (
     <>
     <ResponsiveAppBar> </ResponsiveAppBar>
@@ -22,11 +19,12 @@ export default function HomePage({transfer, onClick}) {
             </div>
           </Grid>
           <Grid xs={6}>
+            <p></p>
             <div>
             <Stack spacing={2}>
-            <Button variant="outlined" onClick={onClick} href='/transfers/1'>Transfer 1: Mabel to Saloni</Button>
-            <Button variant="outlined" onClick={onClick} href='/transfers/2'>Transfer 2: Mabel to Justina</Button>
-            <Button variant="outlined" onClick={onClick} href='/transfers/3'>Transfer 3: Mabel to Saloni</Button>
+            <Button variant="outlined" href='/transfers/1'>Transfer 1: Mabel to Saloni</Button>
+            <Button variant="outlined" href='/transfers/2'>Transfer 2: Mabel to Justina</Button>
+            <Button variant="outlined" href='/transfers/3'>Transfer 3: Mabel to Saloni</Button>
             </Stack>
             </div>
           </Grid>

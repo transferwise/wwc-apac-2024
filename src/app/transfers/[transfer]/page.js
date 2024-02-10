@@ -6,12 +6,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { ListItem } from '@mui/material';
 import { useParams } from 'next/navigation';
 
+import ResponsiveAppBar from "@/components/ResponsiveAppBar";
 
 export default function TransferPage() {
 
@@ -22,7 +20,6 @@ export default function TransferPage() {
   React.useEffect(()=> {
   const transferDetailsResponse = async () => {
     try {
-      console.log("hello")
       const res = await fetch(`/api/transfers/${params.transfer}`);
       const data = await res.json();
       setTransferDetailsJson(data.result[0])
@@ -36,6 +33,11 @@ export default function TransferPage() {
   
   const pricingDetailsJson = {transferId: params.transfer, conversionFee: '2.02', conversionRate: 0.75}
   
+  const getConvertAmount = (sourceAmount, fee) => {
+    console.log(sourceAmount);
+    return parseFloat(sourceAmount) - parseFloat(fee);
+  }
+
   const feeDetails = () => (
     <React.Fragment>
       <CardContent>
@@ -43,7 +45,7 @@ export default function TransferPage() {
           Our Fee : {pricingDetailsJson.conversionFee} {transferDetailsJson.sourceCurrency}
         </Typography>
         <Typography variant="h5"  gutterBottom>
-          Amount we'll convert : {pricingDetailsJson.convertedAmount} {transferDetailsJson.sourceCurrency}
+          Amount we'll convert : {getConvertAmount(transferDetailsJson.sourceAmount, pricingDetailsJson.conversionFee)} {transferDetailsJson.sourceCurrency}
         </Typography>
         <Typography variant="h5"  gutterBottom>
           Conversion Rate : {pricingDetailsJson.conversionRate}
@@ -75,10 +77,14 @@ export default function TransferPage() {
   
     return (
       loading ? <> </> : 
+      <>
+      <ResponsiveAppBar />
+      <p></p>
       <Container maxWidth={false}>
         <Chip label={`Transfer ${params.transfer}`} color="success" size="medium" ></Chip>
         <Card variant="outlined">{transferDetails()}</Card>
       </Container>
+      </>
  
     );
 }

@@ -44,8 +44,8 @@ function Calculator() {
     try {
       const res = await fetch(`/api/calculator/`, requestOptions);
       const newData = await res.json();
-      setRate(newData.rate)
-      setTargetAmount(newData.targetAmount)
+      setRate(newData.rate);
+      setTargetAmount(newData.targetAmount);
     } catch (err) {
       console.log("Error calling API");
     }

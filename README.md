@@ -27,6 +27,30 @@ This will bring up docker containers for the database, Nextjs api routes and Nex
 Nextjs development mode by default will already have hot-reloading for frontend pages.
 The development docker will use nodemon to ensure hot-reloading for the api routes too.
 
+This will also wait for the postgres db to be up, run the db migrations and seed the database.
+
+# Run all tests
+
+```bash
+npm run test
+```
+
+# Run a specific test
+
+For example,
+Running the tests in the "transfers" folder:
+
+```bash
+npm run test -- "transfers"
+
+npm run test -- "api/transfers"
+
+npm run test -- "api/transfers/route.test.js"
+```
+
+Any of the above will work because jest does a regex search of the tests.
+
+
 # Run database migrations
 
 After you bring up the docker containers, run the migration:
@@ -43,9 +67,9 @@ npm run knex seed:run
 
 According to the knex guide, seed files are executed in alphabetical order. Unlike migrations, every seed file will be executed when you run the command. You should design your seed files to reset tables as needed before inserting data.
 
-# Environment Variables
+# Note about Environment Variables
 
-Create your own `.env.local` file using the `.env.local.example` as an example.
+The `.env.local` and `.env.migrate` are included in this project because there are no real secrets in them - the local database user and password is not really a secret because they are already in the Dockerfile. If we were really to make a production-ready project, it should read the database env variables from somewhere safer like a secrets vault in AWS.
 
 Nextjs will automatically load `.env.local` as `process.env` variables, but for knex commands we use `dotenv-cli` to load the env variables.
 
