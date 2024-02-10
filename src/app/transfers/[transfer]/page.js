@@ -31,24 +31,25 @@ export default function TransferPage() {
     transferDetailsResponse();
   }, []);
   
-  const pricingDetailsJson = {transferId: params.transfer, conversionFee: '2.02', conversionRate: 0.75}
-  
   const getConvertAmount = (sourceAmount, fee) => {
-    console.log(sourceAmount);
     return parseFloat(sourceAmount) - parseFloat(fee);
+  }
+
+  const getTargetAmount = (amountToConvert, conversionRate) => {
+    return amountToConvert * conversionRate;
   }
 
   const feeDetails = () => (
     <React.Fragment>
       <CardContent>
         <Typography variant="h5"  gutterBottom>
-          Our Fee : {pricingDetailsJson.conversionFee} {transferDetailsJson.sourceCurrency}
+          Our Fee : {transferDetailsJson.fee} {transferDetailsJson.sourceCurrency}
         </Typography>
         <Typography variant="h5"  gutterBottom>
-          Amount we'll convert : {getConvertAmount(transferDetailsJson.sourceAmount, pricingDetailsJson.conversionFee)} {transferDetailsJson.sourceCurrency}
+          Amount we'll convert : {getConvertAmount(transferDetailsJson.sourceAmount, transferDetailsJson.fee)} {transferDetailsJson.sourceCurrency}
         </Typography>
         <Typography variant="h5"  gutterBottom>
-          Conversion Rate : {pricingDetailsJson.conversionRate}
+          Conversion Rate : {transferDetailsJson.conversionRate}
         </Typography>
       </CardContent>
     </React.Fragment>
@@ -69,7 +70,8 @@ export default function TransferPage() {
         </Box>
         
         <Typography variant="h5"  gutterBottom>
-          Recipient received : {transferDetailsJson.targetAmount} {transferDetailsJson.targetCurrency}
+          Recipient received : {getTargetAmount(getConvertAmount(transferDetailsJson.sourceAmount,
+            transferDetailsJson.fee), transferDetailsJson.conversionRate)} {transferDetailsJson.targetCurrency}
         </Typography>
       </CardContent>
     </React.Fragment>
