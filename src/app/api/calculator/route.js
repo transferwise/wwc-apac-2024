@@ -9,9 +9,6 @@ export async function POST(req) {
   const data = await req.json();
   const { sourceAmount, sourceCurrency, targetCurrency } = data;
 
-  const fee = (1 / 100) * sourceAmount;
-  const total = sourceAmount + fee;
-
   const rate = await knex
     .from("rates")
     .where({
@@ -21,6 +18,7 @@ export async function POST(req) {
     .andWhere("date", "<", knex.fn.now())
     .first();
 
+<<<<<<< HEAD
   if (rate === undefined) {
     return NextResponse.json({
       ...data,
@@ -30,6 +28,12 @@ export async function POST(req) {
     })
   }
 
+=======
+  //Task 2: Calculate Target Amount correctly. 
+  //TODO:
+  const fee = (1 / 100) * sourceAmount; //we charge a fixed 1% fee on  all transfers
+  const total = sourceAmount + fee;
+>>>>>>> 5c906ee (add comments)
   const targetAmount = total * rate.rate;
   const roundedNumber = formatNumberWithTwoDecimals(targetAmount);
 

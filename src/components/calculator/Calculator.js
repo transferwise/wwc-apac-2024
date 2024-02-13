@@ -16,7 +16,7 @@ function Calculator() {
   const [targetAmount, setTargetAmount] = useState(1000);
   const [sourceCurrency, setSourceCurrency] = useState(currencies[0]);
   const [targetCurrency, setTargetCurrency] = useState(currencies[1]);
-  const [rate, setRate] = useState(1.175);
+  const [rate, setRate] = useState(1.175); //we use a fixed rate
 
   const handleSetSourceAmount = async (event) => {
     setSourceAmount(event.target.value);
