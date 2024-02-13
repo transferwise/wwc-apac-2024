@@ -27,7 +27,7 @@ export async function POST(req) {
     })
   }
 
-  //Task 2: Calculate Target Amount correctly. 
+  //Task 1: Calculate Target Amount correctly. 
   //TODO:
   const fee = (1 / 100) * sourceAmount; //we charge a fixed 1% fee on  all transfers
   const total = sourceAmount + fee;
