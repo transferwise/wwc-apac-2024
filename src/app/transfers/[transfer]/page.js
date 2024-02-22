@@ -39,6 +39,7 @@ export default function TransferPage() {
     return amountToConvert * conversionRate;
   }
 
+    //Task 2: Still debating if we should include this as part of task
   const feeDetails = () => (
     <React.Fragment>
       <CardContent>
