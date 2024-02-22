@@ -17,8 +17,6 @@ bun dev
 
 # Run development docker
 
-I recommend this over the normal npm run dev.
-
 ```bash
 npm run docker:dev
 ```
@@ -27,7 +25,7 @@ This will bring up docker containers for the database, Nextjs api routes and Nex
 Nextjs development mode by default will already have hot-reloading for frontend pages.
 The development docker will use nodemon to ensure hot-reloading for the api routes too.
 
-This will also wait for the postgres db to be up, run the db migrations and seed the database.
+This will also wait for the Postgres db to be up, run the db migrations and seed the database.
 
 # Run all tests
 
@@ -76,11 +74,3 @@ Nextjs will automatically load `.env.local` as `process.env` variables, but for 
 # Connecting to the database 
 
 DBeaver is one of the options you could use to connect to the database, unless you love the command line for postgres.
-
-# Note about volumes
-
-`renew-anon-volumes`` is useful for always refreshing and creating a new volume for node_modules when installing new packages. However it always creates new volumes so you might need to docker prune volumes more often when using it.
-
-# Note about database table names
-
-I recommend using lowercase because postgres flavor of SQL does not play well with uppercase / camelCase unless you use quotes. However, if you use lowercase with underscores (snakecase), usually you will need to convert the underscores in the table names to camelCase when using an ORM like knex, since JavaScript variables should be in camelCase. The easiest way to solve this is to just use lowercase without underscores for now...
