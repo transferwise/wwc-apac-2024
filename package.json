@@ -12,7 +12,8 @@
     "lint": "next lint",
     "test": "jest",
     "nodemon": "nodemon --watch pages --exec next dev",
-    "docker:dev": "./setup.sh",
+    "docker:dev": "docker-compose up --build --renew-anon-volumes",
+    "setup:dev": "./setup.sh",
     "docker:prod": "docker-compose -f docker-compose.prod.yml up -d --build",
     "knex": "dotenv -e .env.migrate knex"
   },

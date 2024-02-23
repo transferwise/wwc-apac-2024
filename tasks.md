@@ -10,6 +10,12 @@ Go to localhost:3000/calculator. Why is it not working?
 - Is there any error trace or logging on the backend server?
 - Is any test failing when you run the tests?
 
+```bash
+
+npm run test
+
+```
+
 
 ## Task 2
 
