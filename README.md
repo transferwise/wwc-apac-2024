@@ -15,17 +15,21 @@ pnpm dev
 bun dev
 ```
 
-# Run development docker
+# Quick Start for development
 
 ```bash
 npm run docker:dev
 ```
 
-This will bring up docker containers for the database, Nextjs api routes and Nextjs frontend.
+```bash
+npm run setup:dev
+```
+
+`docker:dev` will bring up docker containers for the database, Nextjs api routes and Nextjs frontend.
 Nextjs development mode by default will already have hot-reloading for frontend pages.
 The development docker will use nodemon to ensure hot-reloading for the api routes too.
 
-This will also wait for the Postgres db to be up, run the db migrations and seed the database.
+`setup:dev` will wait for the Postgres db to be up, run the db migrations and seed the database.
 
 # Run all tests
 
