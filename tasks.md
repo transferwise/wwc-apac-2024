@@ -17,13 +17,45 @@ As a Special Product Engineer at Wise, your mission is to enhance the target amo
 
 Go to localhost:3000/calculator. Why is it not working? 
 
-- What can you use in the Chrome developer tools to figure out what is wrong?
+- What can you use in the Google Chrome developer tools to figure out what is wrong? Click on the Network tab.
 - Is there any error trace or logging on the backend server?
 
-Go to localhost:3000/api/calculator. Is it working?
+The API for calculator expects a POST request. Is this a RESTful practice? Does this follow REST principles?
 
-- What is the difference between going to /calculator vs /api/calculator?
+Reading materials for REST APIs:
 
+- [What is a REST API? Video](https://www.youtube.com/watch?v=lsMQRaeKNDk&t=10s)
+- [Is it ok to POST without creating resource](https://stackoverflow.com/questions/21473437/restful-when-is-it-ok-to-post-without-creating-a-resource-on-server)
+- [REST API design best practices](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
+
+
+How do we make a POST request to the backend server?
+
+We could use a program like Postman or command line cURL, but let's try Google Chrome developer tools.
+
+Did you know you can run javascript on Console?
+
+![POST request example](images/POST_request.png)
+
+To make a post request to our calculator API:
+
+```javascript
+fetch('http://localhost:3000/api/calculator', {
+  method: 'POST',
+  body: JSON.stringify({
+    sourceAmount: 100,
+    sourceCurrency: "SGD", 
+    targetCurrency: "USD"
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8'
+  }
+})
+.then(res => res.json())
+.then(console.log)
+```
+
+Does the API work as expected?
 
 ## Task 2
 
@@ -38,11 +70,7 @@ Same thing, can you figure out why is it not working?
 - Run all backend tests
 - Run only the "api/transfers" tests
 
-Now go to localhost:3000/api/transfers/1. What do you see?
-
-
-Also try localhost:3000/api/transfers/2 and localhost:3000/api/transfers/30. Anything different? What do the numbers 1, 2 and 30 mean?
-
+Now go to localhost:3000/api/transfers/1. What do you see? 
 
 After fixing the API, there is still something missing from the frontend. The fee is missing! Can you figure out how to fix it?
 
@@ -55,6 +83,15 @@ After fixing the API, there is still something missing from the frontend. The fe
 - The backend queries the database, but it does not use pure SQL queries. Consider finding an example of `knex` either in this project or online documentation.
 
 - You will need to query more than 1 database table for this task.
+
+
+When you go to localhost:3000/api/transfers/1, is this a GET request?
+
+Also try localhost:3000/api/transfers/2 and localhost:3000/api/transfers/30. 
+
+- Anything different? What do the numbers 1, 2 and 30 mean?
+
+- What is the difference between going to localhost:3000/transfers/1 vs localhost:3000/api/transfers/1 on your browser?
 
 ## Task 3
 
