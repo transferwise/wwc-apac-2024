@@ -8,11 +8,11 @@ exports.seed = async function(knex) {
     await knex(tableName).del()
     await knex(tableName).insert([
         {transferId: "1", paymentMode: "Bank Transfer", paymentReference: "forex",
-            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: "XX"},
+            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: 9.04},
         {transferId: "2", paymentMode: "Bank Transfer", paymentReference: "forex",
-            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: "XX"},
+            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: 9.10},
         {transferId: "3", paymentMode: "Bank Transfer", paymentReference: "forex",
-            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: "XX"},
+            sourceAmount: 12.23, sourceCurrency: "SGD", targetCurrency:"USD", targetAmount: 8.90},
         {transferId: "4", paymentMode: "Bank Transfer", paymentReference: "forex",
             sourceAmount: 15.50, sourceCurrency: "USD", targetCurrency:"EUR", targetAmount: 14.20},
         {transferId: "5", paymentMode: "Credit Card", paymentReference: "forex",

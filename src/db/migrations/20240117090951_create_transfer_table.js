@@ -10,7 +10,7 @@ exports.up = async function (knex) {
         table.string('paymentReference').notNullable();
         table.double('sourceAmount',2,2).notNullable();
         table.string('sourceCurrency').notNullable();
-        table.string('targetAmount').notNullable();
+        table.double('targetAmount',2,2).notNullable();
         table.string('targetCurrency').notNullable();
         table.timestamps(true, true);
     });

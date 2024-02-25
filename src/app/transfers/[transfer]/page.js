@@ -36,10 +36,6 @@ export default function TransferPage() {
     return parseFloat(sourceAmount) - parseFloat(fee);
   }
 
-  const getTargetAmount = (amountToConvert, conversionRate) => {
-    return amountToConvert * conversionRate;
-  }
-
   const transferDetails = () => (
     <React.Fragment>
       <CardContent>
@@ -90,8 +86,7 @@ export default function TransferPage() {
           </Typography>
           <br />
           <Typography variant="h4">
-          {getTargetAmount(getConvertAmount(transferDetailsJson.sourceAmount,
-            transferDetailsJson.fee), transferDetailsJson.conversionRate)} {transferDetailsJson.targetCurrency}
+          {transferDetailsJson.targetAmount} {transferDetailsJson.targetCurrency}
           </Typography>
           <br />
           <Card variant="outlined">{transferDetails()}</Card>
