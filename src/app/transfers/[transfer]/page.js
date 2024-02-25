@@ -17,13 +17,13 @@ export default function TransferPage() {
   const [transferDetailsJson, setTransferDetailsJson] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const params = useParams();
-
+ 
   React.useEffect(()=> {
   const transferDetailsResponse = async () => {
     try {
       const res = await fetch(`/api/transfers/${params.transfer}`);
       const data = await res.json();
-      setTransferDetailsJson(data.result[0])
+      setTransferDetailsJson(data)
       setLoading(false);
     } catch (err) {
       console.log(err);
