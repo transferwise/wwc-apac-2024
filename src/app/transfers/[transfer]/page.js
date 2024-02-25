@@ -1,12 +1,13 @@
 'use client'
 
 import Container from '@mui/material/Container';
-import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar'
+import PaidIcon from '@mui/icons-material/Paid'
 import { useParams } from 'next/navigation';
 
 import ResponsiveAppBar from "@/components/ResponsiveAppBar";
@@ -39,10 +40,12 @@ export default function TransferPage() {
     return amountToConvert * conversionRate;
   }
 
-    //Task 2: Still debating if we should include this as part of task
-  const feeDetails = () => (
+  const transferDetails = () => (
     <React.Fragment>
       <CardContent>
+        <Typography variant="h5"  gutterBottom>
+          You sent : {transferDetailsJson.sourceAmount} {transferDetailsJson.sourceCurrency}
+        </Typography>
         <Typography variant="h5"  gutterBottom>
           Our Fee : {transferDetailsJson.fee} {transferDetailsJson.sourceCurrency}
         </Typography>
@@ -52,27 +55,8 @@ export default function TransferPage() {
         <Typography variant="h5"  gutterBottom>
           Conversion Rate : {transferDetailsJson.conversionRate}
         </Typography>
-      </CardContent>
-    </React.Fragment>
-  );
-
-  // TODO: use List component instead of card component (BASIC List)
-  const transferDetails = () => (
-    <React.Fragment>
-      <CardContent>
         <Typography variant="h5"  gutterBottom>
           Funded by : {transferDetailsJson.paymentMode}
-        </Typography>
-        <Typography variant="h5"  gutterBottom>
-          You sent : {transferDetailsJson.sourceAmount} {transferDetailsJson.sourceCurrency}
-        </Typography>
-        <Box sx={{maxWidth: 300}}>
-          <Card variant="outlined">{feeDetails()}</Card>
-        </Box>
-        
-        <Typography variant="h5"  gutterBottom>
-          Recipient received : {getTargetAmount(getConvertAmount(transferDetailsJson.sourceAmount,
-            transferDetailsJson.fee), transferDetailsJson.conversionRate)} {transferDetailsJson.targetCurrency}
         </Typography>
       </CardContent>
     </React.Fragment>
@@ -83,9 +67,34 @@ export default function TransferPage() {
       <>
       <ResponsiveAppBar />
       <p></p>
-      <Container maxWidth={false}>
+      {/* <Container maxWidth={false}>
         <Chip label={`Transfer ${params.transfer}`} color="success" size="medium" ></Chip>
         <Card variant="outlined">{transferDetails()}</Card>
+      </Container> */}
+
+      <Container component="main" maxWidth="s">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+            <PaidIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+          Transfer {params.transfer}
+          </Typography>
+          <br />
+          <Typography variant="h4">
+          {getTargetAmount(getConvertAmount(transferDetailsJson.sourceAmount,
+            transferDetailsJson.fee), transferDetailsJson.conversionRate)} {transferDetailsJson.targetCurrency}
+          </Typography>
+          <br />
+          <Card variant="outlined">{transferDetails()}</Card>
+        </Box>
       </Container>
       </>
  
