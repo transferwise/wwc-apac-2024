@@ -27,8 +27,10 @@ const MOCK_TRANSFER = {
   "sourceAmount": 45.25,
   "sourceCurrency": "AUD",
   "targetCurrency": "USD",
-  "targetAmount": 38.40
-}
+  "targetAmount": 38.40,
+  "fee": 0.03695,
+  "conversionRate": 0.79
+};
 
 describe('Transfers Page', () => {
   let originalFetch;
@@ -51,9 +53,17 @@ describe('Transfers Page', () => {
     global.fetch = mockedFetch;
 
     // test
-    render(<TransferPage />)
+    render(<TransferPage />);
  
     // assert
-    expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Transfer 1')
+    expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Transfer 1');
+    const headings = await screen.findAllByRole('heading', { level: 5 });
+    expect(headings.length).toBe(5);
+    // hint: which one is the fee?
+    expect(headings[0]).toHaveTextContent("45.25 AUD")
+    expect(headings[1]).toHaveTextContent("0.03695 AUD")
+    expect(headings[2]).toHaveTextContent("45.21305 AUD")
+    expect(headings[3]).toHaveTextContent("0.79")
+    expect(headings[4]).toHaveTextContent("Credit Card")
   })
 })
