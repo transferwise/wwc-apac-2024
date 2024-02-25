@@ -9,9 +9,102 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const { useState } = require("react")
 
-function Calculator() {
-  const currencies = ["SGD", "USD", "GBP", "EUR"];
+const currencies = ["SGD", "USD", "GBP", "EUR"];
 
+const getAmountWeConvert = (sourceAmount, ourFee) => {
+  return parseFloat(sourceAmount) - parseFloat(ourFee)
+}
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  boxShadow: 'none'
+}));
+// this has to be a seperate component without states so that input box does not lose focus
+const FormComponent = ({ states, handles }) => (
+  <>
+    <Stack sx={{ m: 2 }} spacing={5} direction="row">
+      <Item>
+        <TextField
+          id="inputAmount"
+          label="You send"
+          variant="outlined"
+          value={states.sourceAmount}
+          onChange={handles.handleSetSourceAmount}
+          type="number" /></Item>
+      <Item>
+        <FormControl>
+          <InputLabel id="select-currency-label">Currency:</InputLabel>
+          <Select
+            labelId="select-currency-label"
+            id="select"
+            value={states.sourceCurrency}
+            onChange={handles.handleSetSourceCurrency}
+            label="Select an Option"
+          >
+            {currencies.map((c, index) => (
+              <MenuItem key={index} value={c}>{c}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Item>
+    </Stack><Stack sx={{ m: 2 }} spacing={5} direction="row">
+      <Fab size="small" color="primary" aria-label="remove">
+        <RemoveIcon></RemoveIcon>
+      </Fab>
+      <Item>
+        {states.fee.toFixed(2) + " " + states.sourceCurrency}
+      </Item>
+      <Chip label="Transfer Fees" color="primary" />
+    </Stack><Stack sx={{ m: 2 }} spacing={5} direction="row">
+      <Fab size="small" color="primary" aria-label="remove">
+        <DragHandleIcon></DragHandleIcon>
+      </Fab>
+      <Item>
+        {getAmountWeConvert(states.sourceAmount, states.fee) + " " + states.sourceCurrency}
+      </Item>
+      <Chip label="Amount we'll convert" color="primary" />
+    </Stack><Stack sx={{ m: 2 }} spacing={5} direction="row">
+      <Fab size="small" color="primary" aria-label="remove">
+        <CloseIcon></CloseIcon>
+      </Fab>
+      <Item>
+        {states.rate}
+      </Item>
+      <Chip label="Rate" color="primary" />
+    </Stack><Stack sx={{ m: 2 }} spacing={5} direction="row">
+      <Item>
+        <TextField
+          disabled
+          variant="outlined"
+          label="Recipient gets"
+          value={states.targetAmount}
+          type="number" />
+      </Item>
+      <Item>
+        <FormControl>
+          <InputLabel id="select-currency-label">Select a currency:</InputLabel>
+          <Select
+            labelId="select-currency-label"
+            id="select"
+            value={states.targetCurrency}
+            onChange={handles.handleSetTargetCurrency}
+            label="Select an Option"
+            defaultValue={currencies[0]}
+          >
+            {currencies.map((c, index) => (
+              <MenuItem key={index} value={c}>{c}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Item>
+    </Stack>
+  </>
+)
+function Calculator() {
   const [sourceAmount, setSourceAmount] = useState(0);
   const [targetAmount, setTargetAmount] = useState(0);
   const [sourceCurrency, setSourceCurrency] = useState(currencies[0]);
@@ -53,107 +146,14 @@ function Calculator() {
     }
   }
 
-  const getAmountWeConvert = (sourceAmount, ourFee) => {
-    return parseFloat(sourceAmount) - parseFloat(ourFee)
+  const props = {
+    "states": { sourceAmount, sourceCurrency, targetAmount, targetCurrency, rate, fee },
+    "handles": { handleSetSourceAmount, handleSetSourceCurrency, handleSetTargetCurrency }
   }
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    boxShadow: 'none'
-  }));
 
   return (
     <>
-      <Stack sx={{ m: 2 }} spacing={5} direction="row">
-        <Item>
-          <TextField
-            id="inputAmount"
-            label="You send"
-            variant="outlined"
-            value={sourceAmount}
-            onChange={handleSetSourceAmount}
-            type="number"
-          /></Item>
-        <Item>
-          <FormControl>
-            <InputLabel id="select-currency-label">Currency:</InputLabel>
-            <Select
-              labelId="select-currency-label"
-              id="select"
-              value={sourceCurrency}
-              onChange={handleSetSourceCurrency}
-              label="Select an Option"
-            >
-              {
-                currencies.map((c, index) => (
-                  <MenuItem key={index} value={c}>{c}</MenuItem>
-                ))
-              }
-            </Select>
-          </FormControl>
-        </Item>
-      </Stack>
-      <Stack sx={{ m: 2 }} spacing={5} direction="row">
-        <Fab size="small" color="primary" aria-label="remove">
-          <RemoveIcon></RemoveIcon>
-        </Fab>
-        <Item>
-          {fee.toFixed(2) + " " + sourceCurrency}
-        </Item>
-        <Chip label="Transfer Fees" color="primary" />
-      </Stack>
-      <Stack sx={{ m: 2 }} spacing={5} direction="row">
-        <Fab size="small" color="primary" aria-label="remove">
-          <DragHandleIcon></DragHandleIcon>
-        </Fab>
-        <Item>
-          {getAmountWeConvert(sourceAmount, fee) + " " + sourceCurrency}
-        </Item>
-        <Chip label="Amount we'll convert" color="primary" />
-      </Stack>
-      <Stack sx={{ m: 2 }} spacing={5} direction="row">
-        <Fab size="small" color="primary" aria-label="remove">
-          <CloseIcon></CloseIcon>
-        </Fab>
-        <Item>
-          {rate}
-        </Item>
-        <Chip label="Rate" color="primary" />
-      </Stack>
-      <Stack sx={{ m: 2 }} spacing={5} direction="row">
-        <Item>
-          <TextField
-            disabled
-            variant="outlined"
-            label="Recipient gets"
-            value={targetAmount}
-            type="number"
-          />
-        </Item>
-        <Item>
-          <FormControl>
-            <InputLabel id="select-currency-label">Select a currency:</InputLabel>
-            <Select
-              labelId="select-currency-label"
-              id="select"
-              value={targetCurrency}
-              onChange={handleSetTargetCurrency}
-              label="Select an Option"
-              defaultValue={currencies[0]}
-            >
-              {
-                currencies.map((c, index) => (
-                  <MenuItem key={index} value={c}>{c}</MenuItem>
-                ))
-              }
-            </Select>
-          </FormControl>
-        </Item>
-      </Stack>
+      <FormComponent {...props} />
     </>
   );
 };
