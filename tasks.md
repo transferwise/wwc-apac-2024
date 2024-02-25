@@ -6,11 +6,12 @@
 
 As a Special Product Engineer at Wise, your mission is to enhance the target amount calculation for Wise transfers. The target amount represents the final amount that the recipient receives after accounting for all fees and charges applied to the transfer.
 
-- Run the tests <indicate the exact tests to run here and how to run the tests>, see the tests fail
+- Run all tests, see which tests fail
+- Run frontend tests for calculator at "frontend/calculator"
+- Run backend tests for calculator at "api/calculator"
 - Fix the relevant code - Find the TODO
 - Run the tests to ensure they are running correctly
-- Open the frontend page for a transfer 
-- Ensure the target amount is passed on to the frontend and appears correctly.
+- Open up the frontend page for the calculator. Is it working correctly?
 
 ### Tips
 
@@ -18,13 +19,11 @@ Go to localhost:3000/calculator. Why is it not working?
 
 - What can you use in the Chrome developer tools to figure out what is wrong?
 - Is there any error trace or logging on the backend server?
-- Is any test failing when you run the tests?
 
-```bash
+Go to localhost:3000/api/calculator. Is it working?
 
-npm run test
+- What is the difference between going to /calculator vs /api/calculator?
 
-```
 
 ## Task 2
 
@@ -36,8 +35,26 @@ Go to localhost:3000/transfers/1
 
 Same thing, can you figure out why is it not working?
 
-- Is it the backend or the frontend that is missing something?
+- Run all backend tests
+- Run only the "api/transfers" tests
 
+Now go to localhost:3000/api/transfers/1. What do you see?
+
+
+Also try localhost:3000/api/transfers/2 and localhost:3000/api/transfers/30. Anything different? What do the numbers 1, 2 and 30 mean?
+
+
+After fixing the API, there is still something missing from the frontend. The fee is missing! Can you figure out how to fix it?
+
+- Run all frontend tests
+- Run only the "frontend/transfers" tests
+
+
+### Tips
+
+- The backend queries the database, but it does not use pure SQL queries. Consider finding an example of `knex` either in this project or online documentation.
+
+- You will need to query more than 1 database table for this task.
 
 ## Task 3
 

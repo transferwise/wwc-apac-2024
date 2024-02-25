@@ -1,6 +1,10 @@
 # wwc-apac-2024
 Workshop for Wise Woman Code APAC 2024
 
+## Tasks for the workshop
+
+See [Tasks](tasks.md)
+
 ## Getting Started
 
 ### First, run the development server:
@@ -26,13 +30,29 @@ npm run setup:dev
 npm run test
 ```
 
+Running of frontend tests:
+
+```bash
+
+npm run test -- "frontend"
+
+```
+
+
+Running of backend tests:
+
+```bash
+
+npm run test -- "api"
+
+```
+
 # Run a specific test
 
 For example,
-Running the tests in the "transfers" folder:
+Running the tests in the "/api/transfers" folder:
 
 ```bash
-npm run test -- "transfers"
 
 npm run test -- "api/transfers"
 
@@ -40,6 +60,7 @@ npm run test -- "api/transfers/route.test.js"
 ```
 
 Any of the above will work because jest does a regex search of the tests.
+
 
 # Connecting to the database 
 
