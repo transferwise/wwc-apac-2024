@@ -1,6 +1,6 @@
 'use client'
 
-const { FormControl, InputLabel, MenuItem, Select, TextField, Box, Fab, Chip, Stack } = require("@mui/material");
+const { FormControl, InputLabel, MenuItem, Select, TextField, Fab, Chip, Stack } = require("@mui/material");
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -68,9 +68,9 @@ function Calculator() {
 
   return (
     <>
-        <Stack sx={{ m: 2 }} spacing={5} direction="row">
-          <Item>
-            <TextField
+      <Stack sx={{ m: 2 }} spacing={5} direction="row">
+        <Item>
+          <TextField
             id="inputAmount"
             label="You send"
             variant="outlined"
@@ -78,82 +78,82 @@ function Calculator() {
             onChange={handleSetSourceAmount}
             type="number"
           /></Item>
-          <Item>
-            <FormControl>
-              <InputLabel id="select-currency-label">Currency:</InputLabel>
-              <Select
-                labelId="select-currency-label"
-                id="select"
-                value={sourceCurrency}
-                onChange={handleSetSourceCurrency}
-                label="Select an Option"
-              >
-                {
-                  currencies.map((c, index) => (
-                    <MenuItem key={index} value={c}>{c}</MenuItem>
-                  ))
-                }
-              </Select>
-            </FormControl>
-          </Item>
-        </Stack>
-        <Stack sx={{ m: 2 }} spacing={5} direction="row">
-          <Fab size="small" color="primary" aria-label="remove">
-            <RemoveIcon></RemoveIcon>
-          </Fab>
-          <Item>
+        <Item>
+          <FormControl>
+            <InputLabel id="select-currency-label">Currency:</InputLabel>
+            <Select
+              labelId="select-currency-label"
+              id="select"
+              value={sourceCurrency}
+              onChange={handleSetSourceCurrency}
+              label="Select an Option"
+            >
+              {
+                currencies.map((c, index) => (
+                  <MenuItem key={index} value={c}>{c}</MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
+        </Item>
+      </Stack>
+      <Stack sx={{ m: 2 }} spacing={5} direction="row">
+        <Fab size="small" color="primary" aria-label="remove">
+          <RemoveIcon></RemoveIcon>
+        </Fab>
+        <Item>
           {fee.toFixed(2) + " " + sourceCurrency}
-          </Item>
-          <Chip label="Transfer Fees" color="primary" />
-        </Stack>
-        <Stack sx={{ m: 2 }} spacing={5} direction="row">
-            <Fab size="small" color="primary" aria-label="remove">
-              <DragHandleIcon></DragHandleIcon>
-            </Fab>
-          <Item>
-            {getAmountWeConvert(sourceAmount, fee) + " " + sourceCurrency}
-          </Item>
-          <Chip label="Amount we'll convert" color="primary" />
-        </Stack>
-        <Stack sx={{ m: 2 }} spacing={5} direction="row">
-          <Fab size="small" color="primary" aria-label="remove">
-            <CloseIcon></CloseIcon>
-          </Fab>
-          <Item>
+        </Item>
+        <Chip label="Transfer Fees" color="primary" />
+      </Stack>
+      <Stack sx={{ m: 2 }} spacing={5} direction="row">
+        <Fab size="small" color="primary" aria-label="remove">
+          <DragHandleIcon></DragHandleIcon>
+        </Fab>
+        <Item>
+          {getAmountWeConvert(sourceAmount, fee) + " " + sourceCurrency}
+        </Item>
+        <Chip label="Amount we'll convert" color="primary" />
+      </Stack>
+      <Stack sx={{ m: 2 }} spacing={5} direction="row">
+        <Fab size="small" color="primary" aria-label="remove">
+          <CloseIcon></CloseIcon>
+        </Fab>
+        <Item>
           {rate}
-          </Item>
-          <Chip label="Rate" color="primary" />
-        </Stack>
-        <Stack sx={{ m: 2 }} spacing={5} direction="row">
-          <Item>
-            <TextField
-              disabled
-              variant="outlined"
-              label="Recipient gets"
-              value={targetAmount}
-              type="number"
-            />
-            </Item>
-          <Item>
-            <FormControl>
-              <InputLabel id="select-currency-label">Select a currency:</InputLabel>
-              <Select
-                labelId="select-currency-label"
-                id="select"
-                value={targetCurrency}
-                onChange={handleSetTargetCurrency}
-                label="Select an Option"
-                defaultValue={currencies[0]}
-              >
-                {
-                  currencies.map((c, index) => (
-                    <MenuItem key={index} value={c}>{c}</MenuItem>
-                  ))
-                }
-              </Select>
-            </FormControl>
-          </Item>
-        </Stack>
+        </Item>
+        <Chip label="Rate" color="primary" />
+      </Stack>
+      <Stack sx={{ m: 2 }} spacing={5} direction="row">
+        <Item>
+          <TextField
+            disabled
+            variant="outlined"
+            label="Recipient gets"
+            value={targetAmount}
+            type="number"
+          />
+        </Item>
+        <Item>
+          <FormControl>
+            <InputLabel id="select-currency-label">Select a currency:</InputLabel>
+            <Select
+              labelId="select-currency-label"
+              id="select"
+              value={targetCurrency}
+              onChange={handleSetTargetCurrency}
+              label="Select an Option"
+              defaultValue={currencies[0]}
+            >
+              {
+                currencies.map((c, index) => (
+                  <MenuItem key={index} value={c}>{c}</MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
+        </Item>
+      </Stack>
     </>
   );
 };
