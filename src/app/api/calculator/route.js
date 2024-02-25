@@ -27,11 +27,13 @@ export async function POST(req) {
     })
   }
 
-  //Task 1: Calculate Target Amount correctly. 
+  //Task 1: Calculate Target Amount correctly using rateResponse.rate
+  const fee = (1 / 100) * sourceAmount; // Assume we charge a fixed 1% fee here
+  
   //TODO:
-  const fee = (1 / 100) * sourceAmount; //we charge a fixed 1% fee on  all transfers
-  const total = sourceAmount + fee;
+  const total = sourceAmount - fee;
   const targetAmount = total * rate.rate;
+  // end of TODO
   const roundedNumber = formatNumberWithTwoDecimals(targetAmount);
 
   return NextResponse.json({

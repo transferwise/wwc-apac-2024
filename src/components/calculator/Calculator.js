@@ -12,11 +12,12 @@ const { useState } = require("react")
 function Calculator() {
   const currencies = ["SGD", "USD", "GBP", "EUR"];
 
-  const [sourceAmount, setSourceAmount] = useState(1000);
-  const [targetAmount, setTargetAmount] = useState(1000);
+  const [sourceAmount, setSourceAmount] = useState(0);
+  const [targetAmount, setTargetAmount] = useState(0);
   const [sourceCurrency, setSourceCurrency] = useState(currencies[0]);
   const [targetCurrency, setTargetCurrency] = useState(currencies[1]);
-  const [rate, setRate] = useState(1.175); //we use a fixed rate
+  const [rate, setRate] = useState(-1);
+  const [fee, setFee] = useState(-1);
 
   const handleSetSourceAmount = async (event) => {
     setSourceAmount(event.target.value);
@@ -46,9 +47,14 @@ function Calculator() {
       const newData = await res.json();
       setRate(newData.rate);
       setTargetAmount(newData.targetAmount);
+      setFee(newData.fee)
     } catch (err) {
       console.log("Error calling API");
     }
+  }
+
+  const getAmountWeConvert = (sourceAmount, ourFee) => {
+    return parseFloat(sourceAmount) - parseFloat(ourFee)
   }
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -96,7 +102,7 @@ function Calculator() {
             <RemoveIcon></RemoveIcon>
           </Fab>
           <Item>
-          {2.00 + " " + sourceCurrency}
+          {fee.toFixed(2) + " " + sourceCurrency}
           </Item>
           <Chip label="Transfer Fees" color="primary" />
         </Stack>
@@ -105,7 +111,7 @@ function Calculator() {
               <DragHandleIcon></DragHandleIcon>
             </Fab>
           <Item>
-            {2.00 + " " + sourceCurrency}
+            {getAmountWeConvert(sourceAmount, fee) + " " + sourceCurrency}
           </Item>
           <Chip label="Amount we'll convert" color="primary" />
         </Stack>
