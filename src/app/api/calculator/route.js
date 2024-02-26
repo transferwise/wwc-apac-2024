@@ -27,24 +27,12 @@ export async function POST(req) {
     })
   }
 
-  //Task 1: Calculate Target Amount correctly using rateResponse.rate
-  const fee = (1 / 100) * sourceAmount; // Assume we charge a fixed 1% fee here
-  
-  //TODO:
-  const total = sourceAmount - fee;
-  const targetAmount = total * rate.rate;
-  // end of TODO
-  const roundedNumber = formatNumberWithTwoDecimals(targetAmount);
-
+  //Task 1: TODO Calculate Target Amount correctly using rateResponse.rate
+  // Assume we charge a fixed 1% fee here
   return NextResponse.json({
     ...data,
     fee: fee,
     rate: rate.rate,
-    targetAmount: roundedNumber,
+    targetAmount: "xx",
   });
-}
-
-function formatNumberWithTwoDecimals(number) {
-  const formattedNumber = Number(number).toFixed(2);
-  return formattedNumber.replace(/\.00$/, ''); // Remove decimal part if it's .00
 }

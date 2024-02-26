@@ -44,7 +44,7 @@ export default function TransferPage() {
         </Typography>
         <Typography variant="h5"  gutterBottom>
           {/* Task 2 TODO would be to display the fee by using the fee in the transferDetailsJson : */}
-          Our Fee : {transferDetailsJson.fee} {transferDetailsJson.sourceCurrency}
+          
         </Typography>
         <Typography variant="h5"  gutterBottom>
           Amount we'll convert : {getConvertAmount(transferDetailsJson.sourceAmount, transferDetailsJson.fee)} {transferDetailsJson.sourceCurrency}
